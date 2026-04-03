@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            
+            // Relacionamento com a loja (Store)
+            // Se a loja for deletada, os produtos dela também serão (cascade)
+            $table->foreignId('store_id')->constrained()->cascadeOnDelete();
+
+            $table->string('name');
+            $table->string('description');
+            $table->text('body'); // Conteúdo detalhado do produto
+            
+            // Preços: Usamos decimal para precisão financeira (10 dígitos no total, 2 decimais)
+            $table->decimal('price', 10, 2);
+            
+            $table->string('slug')->unique();
+            
             $table->timestamps();
         });
     }

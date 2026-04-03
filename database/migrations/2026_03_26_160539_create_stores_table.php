@@ -12,19 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stores', function (Blueprint $table) {
-            $table->id(); //No laravel moderno, id() já é bigIncrements
-            $table->unsignedBigInteger('user_id');
+            $table->id();
+            
+            // Forma moderna de definir chave estrangeira:
+            // 1. Cria a coluna user_id (BigInteger)
+            // 2. Cria o índice e a restrição de chave estrangeira automaticamente
+            // 3. cascadeOnDelete() garante integridade se o usuário for removido
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->string('name');
-            $table->string('description');
-            $table->string('phone');
+            $table->text('description'); // Alterado para text, pois descriptions costumam ser longas
+            $table->string('phone')->nullable(); // Adicionado nullable para campos opcionais
             $table->string('mobile_phone');
-            $table->string('slug');
+            
+            // unique() é essencial para slugs, pois eles compõem a URL
+            $table->string('slug')->unique();
             
             $table->timestamps(); 
-
-            //Fazendo a ligação com a tabela de usuarios
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

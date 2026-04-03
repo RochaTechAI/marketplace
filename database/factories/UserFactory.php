@@ -13,14 +13,12 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * O password é estático para não precisar re-encriptar a cada usuário criado (ganho de performance)
      */
     protected static ?string $password;
 
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * Definição padrão do usuário do Marketplace
      */
     public function definition(): array
     {
@@ -28,18 +26,31 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            // Usando a nova sintaxe de Password do Laravel 10/11
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Estado para e-mail não verificado
      */
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * DICA DE STARTUP: Estado para criar um usuário que já nasce Administrador
+     * Útil para testar painéis de controle
+     */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'name' => 'Admin Marketplace',
+            'email' => 'admin@admin.com',
         ]);
     }
 }
