@@ -3,19 +3,20 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents; // Opcional
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Esta é a linha mágica que faz o Laravel rodar o seu UserSeeder
-        $this->call([
-            UserSeeder::class,
+        // Cria 10 usuários, cada um com uma loja vinculada via Factory
+        User::factory(10)->hasStore()->create();
+
+        // Cria o usuário administrador específico
+        User::factory()->create([
+            'name' => 'Admin Store',
+            'email' => 'admin@admin.com',
         ]);
     }
 }
