@@ -1,0 +1,59 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#8125
+    [34mall[39m: [
+      [34;4mApp\Models\User[39;24m {#8126
+        [34mid[39m: [35m1[39m,
+        [34mname[39m: [32m"[39m[32mTaís Nádia Pedrosa[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mfilipe.darosa@example.org[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8127
+        [34mid[39m: [35m2[39m,
+        [34mname[39m: [32m"[39m[32mSrta. Antonieta Andressa Alcantara Neto[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mycolaco@example.org[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8128
+        [34mid[39m: [35m3[39m,
+        [34mname[39m: [32m"[39m[32mNathalia Santacruz da Silva Sobrinho[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mrivera.raphael@example.com[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8129
+        [34mid[39m: [35m4[39m,
+        [34mname[39m: [32m"[39m[32mSrta. Letícia Sales Neto[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mccampos@example.org[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8130
+        [34mid[39m: [35m5[39m,
+        [34mname[39m: [32m"[39m[32mAlexandre Beltrão[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mrosana.galhardo@example.org[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8131
+        [34mid[39m: [35m6[39m,
+        [34mname[39m: [32m"[39m[32mSra. Stephanie Serna das Neves Sobrinho[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mqpena@example.net[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8132
+        [34mid[39m: [35m7[39m,
+        [34mname[39m: [32m"[39m[32mJuliano Feliciano Rodrigues[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32muserrano@example.org[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8133
+        [34mid[39m: [35m8[39m,
+        [34mname[39m: [32m"[39m[32mDr. Vitor Gabriel Lutero Sobrinho[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mcarlos.sales@example.net[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8134
+        [34mid[39m: [35m9[39m,
+        [34mname[39m: [32m"[39m[32mJuan Ávila Pereira Filho[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mromero.leo@example.org[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8135
+        [34mid[39m: [35m10[39m,
+        [34mname[39m: [32m"[39m[32mSrta. Olívia Emilly Cruz Sobrinho[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32mmarta.cortes@example.net[39m[32m"[39m,
+      },
+      [34;4mApp\Models\User[39;24m {#8136
+        [34mid[39m: [35m11[39m,
+        [34mname[39m: [32m"[39m[32mAdmin Store[39m[32m"[39m,
+        [34memail[39m: [32m"[39m[32madmin@admin.com[39m[32m"[39m,
+      },
+    ],
+  }

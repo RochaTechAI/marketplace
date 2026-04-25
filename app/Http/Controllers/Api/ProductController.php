@@ -10,24 +10,34 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // Retorna produtos com loja e categorias paginados
-        return response()->json(Product::with(['store', 'categories'])->paginate(10));
+        $products = Product::with(['store', 'categories'])->paginate(10);
+        return response()->json($products);
     }
 
     public function store(Request $request)
     {
-        $product = Product::create($request->all());
+        $data = $request->all();
+        $user = auth()->user(); // Pega o usuário logado pelo token
+
+        // Cria o produto vinculado à loja do usuário
+        $product = $user->store->products()->create($data);
 
         if ($request->has('categories')) {
             $product->categories()->sync($request->get('categories'));
         }
 
-        return response()->json(['data' => ['msg' => 'Produto criado!', 'product' => $product]], 201);
+        return response()->json([
+            'data' => [
+                'msg' => 'Produto criado com sucesso!',
+                'product' => $product
+            ]
+        ], 201);
     }
 
     public function show(string $id)
     {
-        return response()->json(Product::with(['store', 'categories'])->findOrFail($id));
+        $product = Product::with(['store', 'categories'])->findOrFail($id);
+        return response()->json($product);
     }
 
     public function update(Request $request, string $id)
@@ -39,12 +49,19 @@ class ProductController extends Controller
             $product->categories()->sync($request->get('categories'));
         }
 
-        return response()->json(['data' => ['msg' => 'Produto atualizado!', 'product' => $product]]);
+        return response()->json([
+            'data' => [
+                'msg' => 'Produto atualizado!',
+                'product' => $product
+            ]
+        ]);
     }
 
     public function destroy(string $id)
     {
-        Product::findOrFail($id)->delete();
-        return response()->json(['data' => ['msg' => 'Produto removido!']]);
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return response()->json(['data' => ['msg' => 'Removido!']]);
     }
 }
