@@ -16,10 +16,18 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        $user = auth()->user(); // Pega o usuário logado pelo token
+        $data = $request->validate([
+            'name'        => 'required|string',
+            'description' => 'required|string',
+            'body'        => 'required|string',
+            'price'       => 'required|numeric',
+            'slug'        => 'required|string|unique:products,slug',
+            'categories'  => 'array'
+        ]);
 
-        // Cria o produto vinculado à loja do usuário
+        $user = auth()->user(); 
+        
+        // Garante que o produto seja criado dentro da loja do usuário
         $product = $user->store->products()->create($data);
 
         if ($request->has('categories')) {
@@ -42,8 +50,18 @@ class ProductController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $product = Product::findOrFail($id);
-        $product->update($request->all());
+        // SEGURANÇA: Busca o produto apenas dentro da loja do usuário logado
+        $product = auth()->user()->store->products()->findOrFail($id);
+
+        $data = $request->validate([
+            'name'        => 'string',
+            'description' => 'string',
+            'body'        => 'string',
+            'price'       => 'numeric',
+            'slug'        => 'string',
+        ]);
+
+        $product->update($data);
 
         if ($request->has('categories')) {
             $product->categories()->sync($request->get('categories'));
@@ -51,7 +69,7 @@ class ProductController extends Controller
 
         return response()->json([
             'data' => [
-                'msg' => 'Produto atualizado!',
+                'msg' => 'Produto atualizado com sucesso!',
                 'product' => $product
             ]
         ]);
@@ -59,9 +77,10 @@ class ProductController extends Controller
 
     public function destroy(string $id)
     {
-        $product = Product::findOrFail($id);
+        // SEGURANÇA: Garante que só pode deletar se o produto for da loja do usuário
+        $product = auth()->user()->store->products()->findOrFail($id);
         $product->delete();
 
-        return response()->json(['data' => ['msg' => 'Removido!']]);
+        return response()->json(['data' => ['msg' => 'Produto removido com sucesso!']]);
     }
 }
